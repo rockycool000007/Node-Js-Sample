@@ -3,6 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
+    "test": "echo 'Test Completed'",
+    "build": "echo 'Build Completed'",
     "start": "node ./bin/www"
   },
   "dependencies": {
