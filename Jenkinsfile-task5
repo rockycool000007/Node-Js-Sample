@@ -1,0 +1,18 @@
+pipeline {
+    agent { 
+        docker { 
+            image 'maven:3-alpine'
+            // label 'docker-slave-label'
+        }
+    };
+    
+    stages {
+        stage('Build') {
+            steps {
+                script {
+                    echo "Build works fine on docker container..."
+                }
+            }
+        }
+    }
+}
