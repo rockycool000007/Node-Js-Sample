@@ -1,0 +1,18 @@
+pipeline {
+agent any;
+    
+    stages {
+        stage('Checout SCM') {
+            steps {
+                git 'https://github.com/rockycool000007/Node-Js-Sample'
+                
+                script {
+		    // return the latest commit hash when the build starts using webhook
+                    def returnStdout;
+                    def commitId = sh(returnStdout: true, script: 'git rev-parse HEAD')
+                    sh "echo ${commitId}"
+                }
+            }
+        }
+    }
+}
