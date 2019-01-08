@@ -1,0 +1,29 @@
+pipeline {
+    agent any;
+    
+    stages{
+        stage('Build') {
+            
+            input {
+                message "Should we continue the build ?"
+                ok "Continue"
+                submitter "Abort"
+                
+                parameters {
+                    string(name: 'BLD_START', defaultValue: 'Y', description: '')
+                }
+            }
+            
+            steps {
+                script {
+                    echo "The build is continuing...";
+                    
+                    if("$BLD_START" == "Y") {
+                        echo "Hello..."
+                        echo "Variable value is ${BLD_START}"
+                    }
+                }
+            }
+        }
+    }
+}
