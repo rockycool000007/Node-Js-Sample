@@ -1,0 +1,6 @@
+---
+- name: Deploy artifacts
+  hosts: web
+  become: true
+  roles:
+    - copy-artifact

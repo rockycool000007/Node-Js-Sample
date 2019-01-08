@@ -1,0 +1,10 @@
+---
+# tasks file for copy-artifact
+- name: Copy artifact to web servers
+  copy:
+    src: /opt/artifacts/v1.0
+    dest: /opt/newartifacts/
+    #remote_src: yes
+    owner: root
+    group: root
+    mode: u+rwx,g+rwx
