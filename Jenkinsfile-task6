@@ -1,0 +1,42 @@
+pipeline{
+    agent any;
+    
+    stages {
+        stage('Checkout SCM') {
+            steps {
+                sh "echo ${env.GIT_COMMIT}"
+                git 'https://github.com/rockycool000007/simplefilerepo.git'
+            }
+        }
+        
+        stage('Test') {
+            steps {
+                script {
+                    def customImage = docker.build("rockycool/my-image:${env.BUILD_ID}")
+                    
+                    withDockerRegistry(credentialsId: 'dockercred', toolName: 'docker-tool') {
+                        customImage.push()   
+                    }
+                }
+            }
+        }
+        
+        /*
+        stage('Check node version') {
+            steps {
+                sh 'docker build -t myapp:v1.0 .'
+                // def customImage = docker.build("my-image:v1")
+         
+                withCredentials([usernamePassword(credentialsId: 'dockercred', passwordVariable: 'dockerpass', usernameVariable: 'dockeruser')]) {
+                    sh "echo 'Hello'"
+                    sh "docker login -u ${dockeruser} -p ${dockerpass}"
+                }
+                withDockerRegistry(credentialsId: 'dockercred', toolName: 'docker-tool', url: 'https://hub.docker.com') {
+                    //docke
+                }
+               
+               sh 'docker push rockycool/myapp:v1.0'
+            }
+        }*/
+    }
+}
