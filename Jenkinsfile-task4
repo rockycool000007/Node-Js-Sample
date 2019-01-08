@@ -1,0 +1,17 @@
+pipeline {
+    agent any;
+    
+    stages {
+        stage('Checkout SCM') {
+            steps {
+                git 'https://github.com/rockycool000007/simplefilerepo.git'
+            }    
+        }
+        
+        stage('Build') {
+            steps {
+                ansiblePlaybook become: true, credentialsId: 'root_user_web', disableHostKeyChecking: true, forks: 2, installation: 'ansible_2.7.5', inventory: '/opt/task-4/inventory', playbook: '/opt/task-4/deploy.yml'
+            }
+        }
+    }
+}
